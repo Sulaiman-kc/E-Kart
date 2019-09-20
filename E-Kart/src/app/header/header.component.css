@@ -1,0 +1,17 @@
+.example-spacer {
+  flex: 1 1 1 auto;
+}
+.navbar{
+  background-color: rgb(119, 54, 0);
+  color: rgb(255, 255, 255);
+}
+.search{
+  margin: 0;
+}
+.font{
+  font-size: 10px;
+  margin: 0;
+}
+.navleft{
+  float: right;
+}
