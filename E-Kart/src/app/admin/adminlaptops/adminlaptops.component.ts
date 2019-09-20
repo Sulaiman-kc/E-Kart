@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../product.service';
-import { Product } from '../product.model';
+import { ProductService } from '../../product.service';
+import { Product } from '../../product.model';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { AuthService } from '../../auth.service';
 
 declare var M: any;
 
@@ -16,7 +17,8 @@ declare var M: any;
 export class AdminlaptopsComponent implements OnInit {
 
   constructor(public productService: ProductService,
-              private _router: Router) { }
+              private _router: Router,
+              private _auth: AuthService) { }
 
 
   ngOnInit() {

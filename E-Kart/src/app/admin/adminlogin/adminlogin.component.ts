@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AdminloginComponent implements OnInit {
 
-  loginUserData = {}
+  loginUserData = {email:'', password:''}
 
   constructor(private _auth: AuthService,
               private _router: Router) { }
@@ -18,14 +18,9 @@ export class AdminloginComponent implements OnInit {
   }
 
   loginUser () {
-    this._auth.loginUser(this.loginUserData)
-    .subscribe(
-      res => {
-        localStorage.setItem('token', res.token)
-        this._router.navigate(['/admindashboard'])
-      },
-      err => console.log(err)
-    ) 
+    if(this.loginUserData.email == 'admin@mail.com' && this.loginUserData.password == '12345678'){
+      localStorage.setItem('admin','true')
+      this._router.navigate(['/admindashboard'])      
+    }
   }
-
 }

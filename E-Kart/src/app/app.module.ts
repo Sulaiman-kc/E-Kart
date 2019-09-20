@@ -5,19 +5,19 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { EventsComponent } from './events/events.component';
+import { LoginComponent } from './user/login/login.component';
+import { EventsComponent } from './user/events/events.component';
 import { AuthService } from './auth.service';
 import { TokenInterceptorService } from './token-interceptor.service';
-import { AdminloginComponent } from './adminlogin/adminlogin.component';
-import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
-import { AdminlaptopsComponent } from './adminlaptops/adminlaptops.component';
+import { AdminloginComponent } from './admin/adminlogin/adminlogin.component';
+import { AdmindashboardComponent } from './admin/admindashboard/admindashboard.component';
+import { AdminlaptopsComponent } from './admin/adminlaptops/adminlaptops.component';
 import { ProductService } from './product.service';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import { HeaderComponent } from './header/header.component';
+import { HeaderComponent } from './user/header/header.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -31,10 +31,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatChipsModule} from '@angular/material/chips';
-
-
-
-
+import { RegisterComponent } from './user/register/register.component';
+import { AdminComponent } from '../app/admin/admin.component';
 
 
 @NgModule({
@@ -46,6 +44,8 @@ import {MatChipsModule} from '@angular/material/chips';
     AdmindashboardComponent,
     AdminlaptopsComponent,
     HeaderComponent,
+    RegisterComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +69,8 @@ import {MatChipsModule} from '@angular/material/chips';
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatChipsModule
+    MatChipsModule,
+    
   ],
   exports:[MatAutocompleteModule,MatButtonToggleModule],
   providers: [AuthService, AuthGuard, ProductService, 

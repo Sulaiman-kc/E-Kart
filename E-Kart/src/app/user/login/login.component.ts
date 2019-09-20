@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router'
 
 
@@ -23,8 +23,6 @@ export class LoginComponent implements OnInit {
     this._auth.loginUser(this.loginUserData)
     .subscribe(
       res => {
-        console.log("hello");
-
         localStorage.setItem('token', res.token)
         this._router.navigate(['/'])
       },
