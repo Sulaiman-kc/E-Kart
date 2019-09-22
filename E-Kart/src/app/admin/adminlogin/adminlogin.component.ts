@@ -15,6 +15,8 @@ export class AdminloginComponent implements OnInit {
               private _router: Router) { }
 
   ngOnInit() {
+    localStorage.removeItem('usernav')
+    localStorage.removeItem('adminnav')
   }
 
   loginUser () {

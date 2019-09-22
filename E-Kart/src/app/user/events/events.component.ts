@@ -8,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
 export class EventsComponent implements OnInit {
 
   events = []
-  constructor() { }
+  constructor() {
+    localStorage.removeItem('adminnav')
+    localStorage.setItem('usernav','true')
+   }
 
   ngOnInit() {
-    
+   
   }
 
 }

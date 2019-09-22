@@ -1,0 +1,38 @@
+<div class="s-layout">
+        <!-- Sidebar -->
+        <div class="s-layout__sidebar">
+          <a class="s-sidebar__trigger" href="#0">
+             <i class="fa fa-bars"></i>
+          </a>
+        
+          <nav class="s-sidebar__nav">
+             <ul>
+                <li>
+                   <a class="s-sidebar__nav-link" routerLink="/admindashboard" routerLinkActive="active" href="#0">
+                      <i class="fa fa-home"></i><em>Dashboard</em>
+                   </a>
+                </li>
+                <li>
+                   <a class="s-sidebar__nav-link" routerLink="/adminlaptops" routerLinkActive="active" href="#0">
+                     <i class="fas fa-laptop-code"></i><em>Laptops</em>
+                   </a>
+                </li>
+                <li>
+                  <a class="s-sidebar__nav-link" routerLink="/admincomputers" routerLinkActive="active" href="#0">
+                     <i class="fa fa-desktop"></i><em>Computers</em>
+                  </a>
+               </li>
+               <li>
+                  <a class="s-sidebar__nav-link" routerLink="/adminmobiles" routerLinkActive="active" href="#0">
+                     <i class="fa fa-mobile"></i><em>Mobile Phones</em>
+                  </a>
+               </li>
+               <li>
+                  <a class="s-sidebar__nav-link" *ngIf="_auth.loggedInAdmin()" (click)="_auth.logoutAdmin()" routerLink="/adminmobiles" routerLinkActive="active" href="#0">
+                     <i class="fa fa-sign-out"></i><em>Logout</em>
+                  </a>
+               </li>
+             </ul>
+          </nav>
+        </div>        
+        </div>

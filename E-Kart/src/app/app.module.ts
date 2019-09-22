@@ -19,7 +19,6 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { HeaderComponent } from './user/header/header.component';
 import { LayoutModule } from '@angular/cdk/layout';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -33,6 +32,12 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatChipsModule} from '@angular/material/chips';
 import { RegisterComponent } from './user/register/register.component';
 import { AdminComponent } from '../app/admin/admin.component';
+import { AdminheaderComponent } from './admin/Components/adminheader/adminheader.component';
+import { AdminfooterComponent } from './admin/Components/adminfooter/adminfooter.component';
+import { AdminsidebarComponent } from './admin/Components/adminsidebar/adminsidebar.component';
+import { ComputersComponent } from './admin/computers/computers.component';
+import { MobileComponent } from './admin/mobile/mobile.component';
+import { UseraccountComponent } from './user/useraccount/useraccount.component';
 
 
 @NgModule({
@@ -45,7 +50,13 @@ import { AdminComponent } from '../app/admin/admin.component';
     AdminlaptopsComponent,
     HeaderComponent,
     RegisterComponent,
-    AdminComponent
+    AdminComponent,
+    AdminheaderComponent,
+    AdminfooterComponent,
+    AdminsidebarComponent,
+    ComputersComponent,
+    MobileComponent,
+    UseraccountComponent
   ],
   imports: [
     BrowserModule,
@@ -56,9 +67,7 @@ import { AdminComponent } from '../app/admin/admin.component';
     BrowserAnimationsModule,
     MatButtonModule, 
     MatCheckboxModule, 
-    LayoutModule, 
-    MatToolbarModule, 
-    MatSidenavModule, 
+    LayoutModule,   
     MatIconModule, 
     MatListModule, 
     ReactiveFormsModule,

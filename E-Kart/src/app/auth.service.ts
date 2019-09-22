@@ -13,6 +13,10 @@ export class AuthService {
   constructor(private http: HttpClient,
               private _router: Router) { }
 
+  isAdm = localStorage.getItem('adminnav')
+  isUsr = localStorage.getItem('usernav')
+
+
   loginAdmin(user) {
     return this.http.post<any>(this._adminloginUrl, user)
   }

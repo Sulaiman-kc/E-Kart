@@ -9,6 +9,8 @@ import { AdminlaptopsComponent } from './admin/adminlaptops/adminlaptops.compone
 import { HeaderComponent } from './user/header/header.component';
 import { RegisterComponent } from './user/register/register.component';
 import { AdminGuard } from './admin.guard';
+import { ComputersComponent } from './admin/computers/computers.component';
+import { MobileComponent } from './admin/mobile/mobile.component';
 
 const routes: Routes = [
   {
@@ -19,7 +21,7 @@ const routes: Routes = [
   {
     path: 'events',
     canActivate:[AuthGuard],
-    component: EventsComponent
+    component: EventsComponent,
   },
   {
     path: 'register',
@@ -33,6 +35,16 @@ const routes: Routes = [
     path: 'admindashboard',
     canActivate:[AdminGuard],
     component: AdmindashboardComponent
+  },
+  {
+    path: 'admincomputers',
+    canActivate:[AdminGuard],
+    component: ComputersComponent
+  },
+  {
+    path: 'adminmobiles',
+    canActivate:[AdminGuard],
+    component: MobileComponent
   },
   {
     path: 'adminlaptops',
@@ -50,7 +62,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation : 'reload'})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

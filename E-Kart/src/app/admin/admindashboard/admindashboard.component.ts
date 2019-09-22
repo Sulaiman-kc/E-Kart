@@ -7,9 +7,11 @@ import { AuthService } from '../../auth.service';
   styleUrls: ['./admindashboard.component.css']
 })
 export class AdmindashboardComponent implements OnInit {
-
-  constructor(private _auth: AuthService,) { }
-
+flag=1
+  constructor(private _auth: AuthService,) { 
+    localStorage.removeItem('usernav')
+    localStorage.setItem('adminnav','true')   
+  }
 
   ngOnInit() {
   }  

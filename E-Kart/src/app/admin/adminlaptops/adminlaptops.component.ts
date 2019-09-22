@@ -18,10 +18,14 @@ export class AdminlaptopsComponent implements OnInit {
 
   constructor(public productService: ProductService,
               private _router: Router,
-              private _auth: AuthService) { }
+              private _auth: AuthService) {
+                localStorage.removeItem('usernav')
+                localStorage.setItem('adminnav','true')
+               }
 
 
   ngOnInit() {
+  
     this.resetForm();
     this.productList();
   }
@@ -96,6 +100,7 @@ export class AdminlaptopsComponent implements OnInit {
 
 
   productList(){
+  
     this.productService.getProduct().subscribe((res)=>{
       this.productService.product = res as Product[];
     })
@@ -103,17 +108,19 @@ export class AdminlaptopsComponent implements OnInit {
   
   onSubmit(form : NgForm){    
     if(form.value._id == "" ||  form.value._id==null){
-      console.log("Add")
-      this.productService.postProduct(form.value).subscribe(res =>{
-        this.resetForm(form);
-        this.productList()
-      })
+        console.log("Add")
+        this.productService.postProduct(form.value).subscribe(res =>{
+          this.resetForm(form);
+          this.productList()
+          M.toast({html: 'One Item Added' ,classes:'rounded'})
+        })      
     }
     else{
       console.log("Update")
       this.productService.putProduct(form.value).subscribe(res =>{
         this.resetForm(form);
         this.productList()
+        M.toast({html: 'One Item Updated' ,classes:'rounded'})
       })
     }
     
@@ -125,11 +132,12 @@ export class AdminlaptopsComponent implements OnInit {
     document.getElementById("top").scrollIntoView();
   }
 
-  onDelete(_id: string, form: NgForm){
+  onDelete(_id: string, form :NgForm){
     if(confirm('Are You Sure?') == true){
       this.productService.deleteProduct(_id).subscribe((res)=>{
         this.productList();
         this.resetForm(form);
+        M.toast({html: 'One Item added' ,classes:'rounded'})
       })
     }
   }

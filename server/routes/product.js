@@ -12,7 +12,6 @@ router.get('/showlaptop',(req,res) =>{
             res.send(docs);
         }else{
             console.log(err);
-            
         }
     })
 })
