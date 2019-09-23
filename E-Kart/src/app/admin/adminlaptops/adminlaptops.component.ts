@@ -19,8 +19,7 @@ export class AdminlaptopsComponent implements OnInit {
   constructor(public productService: ProductService,
               private _router: Router,
               private _auth: AuthService) {
-                localStorage.removeItem('usernav')
-                localStorage.setItem('adminnav','true')
+                
                }
 
 
@@ -95,6 +94,12 @@ export class AdminlaptopsComponent implements OnInit {
       Warranty_Service_Type: "",
       Covered_in_Warranty: "",
       Not_Covered_in_Warranty: "",
+
+      // image1:"",
+      // image2:"",
+      // image3:"",
+      // image4:"",
+      // image5:"",
     }
   }
 
@@ -112,7 +117,7 @@ export class AdminlaptopsComponent implements OnInit {
         this.productService.postProduct(form.value).subscribe(res =>{
           this.resetForm(form);
           this.productList()
-          M.toast({html: 'One Item Added' ,classes:'rounded'})
+          // M.toast({html: 'One Item Added' ,classes:'rounded'})
         })      
     }
     else{
@@ -120,7 +125,7 @@ export class AdminlaptopsComponent implements OnInit {
       this.productService.putProduct(form.value).subscribe(res =>{
         this.resetForm(form);
         this.productList()
-        M.toast({html: 'One Item Updated' ,classes:'rounded'})
+        // M.toast({html: 'One Item Updated' ,classes:'rounded'})
       })
     }
     
@@ -137,7 +142,7 @@ export class AdminlaptopsComponent implements OnInit {
       this.productService.deleteProduct(_id).subscribe((res)=>{
         this.productList();
         this.resetForm(form);
-        M.toast({html: 'One Item added' ,classes:'rounded'})
+        // M.toast({html: 'One Item added' ,classes:'rounded'})
       })
     }
   }

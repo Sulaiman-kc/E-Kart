@@ -1,0 +1,14 @@
+<div class="row" style="width: 100%; margin: 10px 0">
+    <div class="col-md-3" *ngFor="let product of productService.product">
+        <div class="card mb-2">
+        <img class="card-img-top"
+            src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
+            alt="Card image cap">
+        <div class="card-body">
+            <h4 class="card-title " currencyMask>₹{{product.Cost}}</h4>
+            <p class="card-text">{{product.name}}</p>
+            <a class="btn btn-primary" routerLink="/laptops" routerLinkActive="active">Add to Cart</a>
+        </div>
+    </div>
+  </div>
+</div>

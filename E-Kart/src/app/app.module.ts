@@ -35,9 +35,14 @@ import { AdminComponent } from '../app/admin/admin.component';
 import { AdminheaderComponent } from './admin/Components/adminheader/adminheader.component';
 import { AdminfooterComponent } from './admin/Components/adminfooter/adminfooter.component';
 import { AdminsidebarComponent } from './admin/Components/adminsidebar/adminsidebar.component';
-import { ComputersComponent } from './admin/computers/computers.component';
 import { MobileComponent } from './admin/mobile/mobile.component';
 import { UseraccountComponent } from './user/useraccount/useraccount.component';
+import { LaptopComponent } from './user/laptop/laptop.component';
+import { ComputerComponent } from './user/computer/computer.component';
+import { LaptopsComponent } from './user/laptops/laptops.component';
+import { MobilesComponent } from './user/mobiles/mobiles.component';
+import { ComputersComponent } from './user/computers/computers.component';
+import { NgxCurrencyModule } from "ngx-currency";
 
 
 @NgModule({
@@ -56,7 +61,11 @@ import { UseraccountComponent } from './user/useraccount/useraccount.component';
     AdminsidebarComponent,
     ComputersComponent,
     MobileComponent,
-    UseraccountComponent
+    UseraccountComponent,
+    LaptopComponent,
+    ComputerComponent,
+    LaptopsComponent,
+    MobilesComponent
   ],
   imports: [
     BrowserModule,
@@ -79,6 +88,7 @@ import { UseraccountComponent } from './user/useraccount/useraccount.component';
     MatInputModule,
     MatSelectModule,
     MatChipsModule,
+    NgxCurrencyModule,
     
   ],
   exports:[MatAutocompleteModule,MatButtonToggleModule],

@@ -67,4 +67,11 @@ export class Product {
     Warranty_Service_Type: string;
     Covered_in_Warranty: string;
     Not_Covered_in_Warranty: string;
+
+
+    // image1:string;
+    // image2:string;
+    // image3:string;
+    // image4:string;
+    // image5:string;
 }

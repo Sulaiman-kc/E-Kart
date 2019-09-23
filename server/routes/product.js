@@ -1,9 +1,27 @@
 const express = require('express');
 const router = express.Router();
+var multer = require('multer');
 const { mongoose } = require('../db');
 var { Product } = require('../models/product')
 
 
+var upload = multer({storage: multer.diskStorage({
+
+    destination: function (req, file, callback) 
+    { callback(null, './uploads');},
+    filename: function (req, file, callback) 
+    { callback(null, file.fieldname +'-' + Date.now()+path.extname(file.originalname));}
+  
+  }),
+  
+  fileFilter: function(req, file, callback) {
+    var ext = path.extname(file.originalname)
+    if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg') {
+      return callback(/*res.end('Only images are allowed')*/ null, false)
+    }
+    callback(null, true)
+  }
+  });
 
 
 router.get('/showlaptop',(req,res) =>{
@@ -27,7 +45,7 @@ router.get('/list/:id',(req,res) =>{
     })
 })
 
-router.post('/addlaptop',(req,res) =>{
+router.post('/addlaptop', upload.any(),(req,res) =>{
     var product = new Product({
         name: req.body.name,
         Cost: req.body.Cost,
@@ -97,6 +115,12 @@ router.post('/addlaptop',(req,res) =>{
         Warranty_Service_Type: req.body.Warranty_Service_Type,
         Covered_in_Warranty: req.body.Covered_in_Warranty,
         Not_Covered_in_Warranty: req.body.Not_Covered_in_Warranty,
+
+        // image1:req.files.image1,
+        // image2:req.files.image2,
+        // image3:req.files.image3,
+        // image4:req.files.image4,
+        // image5:req.files.image5,
     })
     product.save((err,doc)=>{
         if(!err){
@@ -108,7 +132,7 @@ router.post('/addlaptop',(req,res) =>{
 })
 
 
-router.put('/updatelaptop/:id',(req,res) =>{
+router.put('/updatelaptop/:id', upload.any(),(req,res) =>{
     
     var product = {
         name: req.body.name,
@@ -179,6 +203,13 @@ router.put('/updatelaptop/:id',(req,res) =>{
         Warranty_Service_Type: req.body.Warranty_Service_Type,
         Covered_in_Warranty: req.body.Covered_in_Warranty,
         Not_Covered_in_Warranty: req.body.Not_Covered_in_Warranty,
+
+
+        // image1:req.files[0].filename,
+        // image2:req.files[1].filename,
+        // image3:req.files[2].filename,
+        // image4:req.files[4].filename,
+        // image5:req.files[5].filename,
     }
     Product.findByIdAndUpdate(req.params.id,{$set: product},{new:true},(err,doc)=>{
         if(!err){

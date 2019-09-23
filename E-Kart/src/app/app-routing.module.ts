@@ -9,8 +9,10 @@ import { AdminlaptopsComponent } from './admin/adminlaptops/adminlaptops.compone
 import { HeaderComponent } from './user/header/header.component';
 import { RegisterComponent } from './user/register/register.component';
 import { AdminGuard } from './admin.guard';
-import { ComputersComponent } from './admin/computers/computers.component';
 import { MobileComponent } from './admin/mobile/mobile.component';
+import { LaptopsComponent } from './user/laptops/laptops.component';
+import { MobilesComponent } from './user/mobiles/mobiles.component';
+import { ComputersComponent } from './user/computers/computers.component';
 
 const routes: Routes = [
   {
@@ -32,14 +34,21 @@ const routes: Routes = [
     component: HeaderComponent
   },
   {
+    path: 'laptops',
+    component: LaptopsComponent
+  },
+  {
+    path: 'computers',
+    component: ComputersComponent
+  },
+  {
+    path: 'mobiles',
+    component: MobilesComponent
+  },
+  {
     path: 'admindashboard',
     canActivate:[AdminGuard],
     component: AdmindashboardComponent
-  },
-  {
-    path: 'admincomputers',
-    canActivate:[AdminGuard],
-    component: ComputersComponent
   },
   {
     path: 'adminmobiles',

@@ -71,11 +71,11 @@ var Product = mongoose.model('product',{
     Covered_in_Warranty: {type:String},
     Not_Covered_in_Warranty: {type:String},
 
-    image1:{type:String},
-	image2:{type:String},
-    image3:{type:String},
-    image2:{type:String},
-    image3:{type:String},
+    // image1:{type:String},
+	// image2:{type:String},
+    // image3:{type:String},
+    // image2:{type:String},
+    // image3:{type:String},
 },'laptops');
 
 module.exports = { Product };
