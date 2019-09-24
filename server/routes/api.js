@@ -71,8 +71,18 @@ router.post('/login', (req, res) => {
       } else {
         let payload = {subject: user._id}
         let token = jwt.sign(payload, 'secretKey')
-        res.status(200).send({token})
+        res.status(200).send({token, user})
       }
+    }
+  })
+})
+
+router.get('/login', (req, res) => {
+  User.find((err,docs)=>{
+    if(!err){
+        res.send(docs);
+    }else{
+        console.log(err);
     }
   })
 })

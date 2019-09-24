@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
               private _router: Router) { }
 
   ngOnInit() {
+    console.log(this._auth.loginUser);
   }
 
   loginUser () {
@@ -23,9 +24,11 @@ export class LoginComponent implements OnInit {
     this._auth.loginUser(this.loginUserData)
     .subscribe(
       res => {
+        console.log(res.user);
         localStorage.setItem('token', res.token)
-        this._router.navigate(['/'])
-        this.ngOnInit
+        localStorage.setItem('user', res.user.username)
+        localStorage.setItem('userId', res.user._id)
+        this._router.navigate(['/events'])
       },
       err => console.log(err)
     ) 

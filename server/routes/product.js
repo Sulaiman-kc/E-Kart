@@ -3,25 +3,27 @@ const router = express.Router();
 var multer = require('multer');
 const { mongoose } = require('../db');
 var { Product } = require('../models/product')
+const { Cart } = require('../models/cart');
+var quantity=1;
 
 
-var upload = multer({storage: multer.diskStorage({
+// var upload = multer({storage: multer.diskStorage({
 
-    destination: function (req, file, callback) 
-    { callback(null, './uploads');},
-    filename: function (req, file, callback) 
-    { callback(null, file.fieldname +'-' + Date.now()+path.extname(file.originalname));}
+//     destination: function (req, file, callback) 
+//     { callback(null, './uploads');},
+//     filename: function (req, file, callback) 
+//     { callback(null, file.fieldname +'-' + Date.now()+path.extname(file.originalname));}
   
-  }),
+//   }),
   
-  fileFilter: function(req, file, callback) {
-    var ext = path.extname(file.originalname)
-    if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg') {
-      return callback(/*res.end('Only images are allowed')*/ null, false)
-    }
-    callback(null, true)
-  }
-  });
+//   fileFilter: function(req, file, callback) {
+//     var ext = path.extname(file.originalname)
+//     if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg') {
+//       return callback(/*res.end('Only images are allowed')*/ null, false)
+//     }
+//     callback(null, true)
+//   }
+//   });
 
 
 router.get('/showlaptop',(req,res) =>{
@@ -34,7 +36,7 @@ router.get('/showlaptop',(req,res) =>{
     })
 })
 
-router.get('/list/:id',(req,res) =>{
+router.get('/showlaptop/:id',(req,res) =>{
     Product.findById(req.params.id,(err,doc)=>{
         if(!err){
             res.send(doc);
@@ -45,7 +47,7 @@ router.get('/list/:id',(req,res) =>{
     })
 })
 
-router.post('/addlaptop', upload.any(),(req,res) =>{
+router.post('/addlaptop', (req,res) =>{
     var product = new Product({
         name: req.body.name,
         Cost: req.body.Cost,
@@ -132,7 +134,7 @@ router.post('/addlaptop', upload.any(),(req,res) =>{
 })
 
 
-router.put('/updatelaptop/:id', upload.any(),(req,res) =>{
+router.put('/updatelaptop/:id',(req,res) =>{
     
     var product = {
         name: req.body.name,
@@ -231,5 +233,73 @@ router.delete('/deletelaptop/:id',(req,res)=>{
     })
 })
 
+router.post('/addcart/:id',(req,res)=>{
+    const user_id = req.body.userId.userId;
+    const p_id = req.params.id;
+    console.log(" user "+user_id)
+    Cart.findOne({userId :user_id},(err,doc)=>{
+        if(!doc){
+            console.log("add ");
+            var cart = new Cart({
+                userId : user_id
+            })
+            cart.product.push({
+                productId : p_id,
+                quantity : 1
+            })
+            cart.save((err,doc)=>{
+                if(!err){
+                    res.send(doc);
+                    console.log('done');
+                    
+                }else{
+                    console.log(err);
+                }
+            })
+        }else{
+            console.log("update");
+            console.log(p_id);
+            Cart.findOne({$and :[ {userId: user_id},{product: {$elemMatch:{productId:p_id}}}]},(err,doc)=>{
+            if(doc){
+                console.log('exist')
+            Cart.update({$and :[ {userId: user_id},{product: {$elemMatch:{productId:p_id}}}]},{$inc: {"product.$.quantity" :1}},(err,doc)=>{
+                        if(!err){
+                            console.log('quan updated')
+                            res.send(doc);
+                        }else{
+                            console.log(err);
+                        }
+                    })
+                }else{
+            var product={
+                    productId : p_id,
+                    quantity : 1
+                }
+            Cart.update({userId:user_id},{"$push" :{"product" :product}},(err,doc)=>{
+                if(!err){
+                    res.send(doc);
+                }else{
+                    console.log(err);
+                }
+            })
+        }
+        })
+
+        }
+    })
+});
+
+router.post('/getcart/',(req,res)=>{
+    const user_id = req.body.userId.userId;
+    const p_id = req.body.userId.userId;
+    console.log(" user "+user_id)
+    Cart.findOne({userId :user_id},(err,doc)=>{
+        if(!err){
+            res.send(doc);
+        }else{
+            console.log(err);
+        }
+    })
+})
 
 module.exports = router;

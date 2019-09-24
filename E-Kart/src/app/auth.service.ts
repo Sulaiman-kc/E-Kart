@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Router } from '@angular/router'
+import { User } from './user.model';
 
 
 @Injectable()
@@ -9,12 +10,10 @@ export class AuthService {
   private _registerUrl = "http://localhost:3000/api/register";
   private _loginUrl = "http://localhost:3000/api/login";
   private _adminloginUrl = "http://localhost:3000/api/adminlogin";
-
+  selectedUser: User;
+  User: User[];
   constructor(private http: HttpClient,
               private _router: Router) { }
-
-  isAdm = localStorage.getItem('adminnav')
-  isUsr = localStorage.getItem('usernav')
 
 
   loginAdmin(user) {
@@ -29,12 +28,23 @@ export class AuthService {
     return this.http.post<any>(this._loginUrl, user)
   }
 
+  getUser() {
+    return this.http.get<any>(this._loginUrl)
+  }
+
   logoutUser() {
     localStorage.removeItem('token')
+    localStorage.removeItem('user') 
+    localStorage.removeItem('userId')
+
     this._router.navigate(['/login'])
   }
   getToken() {
     return localStorage.getItem('token')
+  }
+
+  getId() {
+    return localStorage.getItem('userId')
   }
 
   loggedIn() {

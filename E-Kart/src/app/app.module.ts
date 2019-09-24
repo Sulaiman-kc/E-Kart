@@ -43,6 +43,7 @@ import { LaptopsComponent } from './user/laptops/laptops.component';
 import { MobilesComponent } from './user/mobiles/mobiles.component';
 import { ComputersComponent } from './user/computers/computers.component';
 import { NgxCurrencyModule } from "ngx-currency";
+import { CartComponent } from './cart/cart.component';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import { NgxCurrencyModule } from "ngx-currency";
     LaptopComponent,
     ComputerComponent,
     LaptopsComponent,
-    MobilesComponent
+    MobilesComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
@@ -92,7 +94,7 @@ import { NgxCurrencyModule } from "ngx-currency";
     
   ],
   exports:[MatAutocompleteModule,MatButtonToggleModule],
-  providers: [AuthService, AuthGuard, ProductService, 
+  providers: [AuthService, AuthGuard, ProductService,
   {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
