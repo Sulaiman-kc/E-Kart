@@ -1,14 +1,64 @@
-<div class="row" style="width: 100%; margin: 10px 0">
-    <div class="col-sm-6 col-md-3" *ngFor="let cart of cart">
-        <div class="card mb-2">
-            <img class="card-img-top"
-                src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
-                alt="Card image cap" (click)="onClick(product)" style="cursor: pointer">
-            <div class="card-body">
-                <h4 class="card-title" currencyMask>₹{{cart.Cost}}</h4>
-                <p class="card-text">{{cart.name}}</p>
-                <a class="btn btn-primary" (click)="addToCart(product._id)" routerLinkActive="active">Add to Cart</a>
-            </div>
+<div class="card mb-3 container" *ngIf="cartLen > 0">
+    <mat-toolbar>My Cart</mat-toolbar>
+  <div class="row no-gutters" *ngFor="let item of item ; let i = index">
+    <div class="col-md-3">
+      <img src="{{item.URL}}" class="card-img" alt="...">
+    </div>
+    <div class="col-md-6">
+      <div class="card-body">
+        <h5 class="card-title">{{item.Model_Number}}</h5>
+        <p class="card-text">{{item.name}}</p>
+        <p class="card-title" style="font-size: 18px">₹{{total[i] | number: '1.0-0'}} <span *ngIf="item.Discount != 0" style="font-size: 14px; color: rgb(141, 141, 141);text-decoration-line:line-through;" >₹{{item.Cost | number: '1.0-0'}}</span></p>
+        <p class="card-text" style="color: rgb(80, 158, 2)" *ngIf="item.Discount != 0">{{item.Discount | number: '1.0-0'}}% off</p>
+        <button mat-button>Remove</button>
+        <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+      </div>
+    </div>
+    <div class="col-md-1" >
+        <div class="def-number-input number-input safari_only">
+          <input class="quantity" name="quantity" value="{{cartQ[i]}}" type="number" style="width: 40px; font-size: 20px;margin-top: 30%" disabled>
+        </div>      
+    </div>
+    <div class="col-md-2" >
+        <!-- <a href="" style="float: right; width: 1px; color: rgb(114, 114, 114)">x</a> <br> <br> -->
+        <div class="row">
+          <div class="col-md-6">
+            <p>Price</p> 
+            <p>Discount</p>
+            <p>Items</p>
+            <hr>
+            <p>Total</p>
+          </div>
+          <div class="col-md-6">
+            <p >₹{{item.Cost | number: '1.0-0'}}</p>
+            <p>- ₹{{dis[i] | number: '1.0-0'}}</p>
+            <p>{{cartQ[i] | number: '1.0-0'}}</p>
+            <hr>
+            <p>₹{{Ltotal[i] | number: '1.0-0'}}</p>
+          </div>
         </div>
     </div>
+  </div>
+  <hr>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-4">
+        <h4>TOTAL</h4>
+      </div>
+      <div class="col-md-4">
+        <h4>₹{{Gtotal | number: '1.0-0' }}</h4>
+      </div>
+      <div class="col-md-4" style="text-align: center">
+        <button class="btn btn-primary"routerLink="/main">Order Now</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="card mb-3 container" *ngIf="cartLen === 0">
+  <div class="row no-gutters" style="text-align: center; margin: 20% 40%">
+    <h1>Your Cart is Empty</h1>
+    <button class="btn btn-primary" routerLink="/" style="margin: 23%">Search</button>
+  </div>
 </div>

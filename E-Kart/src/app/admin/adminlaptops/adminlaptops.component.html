@@ -1,4 +1,5 @@
 
+
 <div class="wrapper default-theme">
     <main>
         <div class="row" style="width: 100%">
@@ -17,24 +18,35 @@
                             </div>
                             <div class="card-body ">
                                 <form #productForm="ngForm" (ngSubmit)="onSubmit(productForm)">
+                                  <div class="alert alert-danger" *ngIf="error != 0">
+                                    <strong>Error!</strong> {{error}}
+                                  </div>
                                   <div class="form-group">
-                                    <input type="text" name="_id" #_id="ngModel" [(ngModel)]="productService.selectedProduct._id"  class="form-control rounded-0" >
+                                    <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="productService.selectedProduct._id"  class="form-control rounded-0" >
                                   </div>
                                       <div class="form-group">
-                                        <label for="inputEmail4">Name</label>
+                                        <label for="">Name</label>
                                         <input type="text" class="form-control" name="name" #name="ngModel" [(ngModel)]="productService.selectedProduct.name" placeholder="Name">
                                       </div>
+                                      <div class="form-group">
+                                        <label for="">URL</label>
+                                        <input type="text" class="form-control" name="URL" #name="ngModel" [(ngModel)]="productService.selectedProduct.URL" placeholder="URL">
+                                      </div>
                                       <div class="form-row">
-                                        <div class="form-group col-md-4">
-                                          <label for="inputPassword4">Cost</label>
-                                          <input currencyMask type="text" class="form-control" name="Cost" #name="ngModel" [(ngModel)]="productService.selectedProduct.Cost" placeholder="Cost">
+                                        <div class="form-group col-md-3">
+                                          <label for="">Cost</label>
+                                          <input currencyMask [options]="{ align: 'left', prefix: '₹', thousands: ',', decimal: '.' }" type="text" class="form-control" name="Cost" #name="ngModel" [(ngModel)]="productService.selectedProduct.Cost" placeholder="Cost">
                                         </div>
-                                        <div class="form-group col-md-4">
-                                          <label for="inputPassword4">Discount</label>
+                                        <div class="form-group col-md-3">
+                                          <label for="">Number of Item</label>
+                                          <input type="text" class="form-control" name="Number_Item" #name="ngModel" [(ngModel)]="productService.selectedProduct.Number_Item" placeholder="Number of Item">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                          <label for="">Discount</label>
                                           <input type="text" class="form-control" name="Discount" #name="ngModel" [(ngModel)]="productService.selectedProduct.Discount" placeholder="Discount">
                                         </div>
-                                        <div class="form-group col-md-4">
-                                          <label for="inputPassword4">Brand</label>
+                                        <div class="form-group col-md-3">
+                                          <label for="">Brand</label>
                                           <input type="text" class="form-control" name="Brand" #name="ngModel" [(ngModel)]="productService.selectedProduct.Brand" placeholder="Brand">
                                         </div>
                                       </div>
@@ -45,288 +57,46 @@
                                     </div>
                                     <div class="form-row">
                                       <div class="form-group col-md-4">
-                                        <label for="inputPassword4">Model Number</label>
+                                        <label for="">Model Number</label>
                                         <input type="text" class="form-control" name="Model_Number" #name="ngModel" [(ngModel)]="productService.selectedProduct.Model_Number" placeholder="Model_Number">
                                       </div>
                                       <div class="form-group col-md-4">
-                                        <label for="inputPassword4">Part Number</label>
-                                        <input type="text" class="form-control" name="Part_Number" #name="ngModel" [(ngModel)]="productService.selectedProduct.Part_Number" placeholder="Part_Number">
+                                        <label for="">HDD Capacity</label>
+                                        <input type="text" class="form-control" name="HDD_Capacity" #name="ngModel" [(ngModel)]="productService.selectedProduct.HDD_Capacity" placeholder="HDD_Capacity">
                                       </div>
                                       <div class="form-group col-md-4">
-                                        <label for="inputPassword4">Series</label>
+                                        <label for="">Series</label>
                                         <input type="text" class="form-control" name="Series" #name="ngModel" [(ngModel)]="productService.selectedProduct.Series" placeholder="Series">
                                       </div>
                                     </div>
                                     <div class="form-row">
                                       <div class="form-group col-md-4">
-                                        <label for="inputPassword4">Color</label>
+                                        <label for="">Color</label>
                                         <input type="text" class="form-control" name="Color" #name="ngModel" [(ngModel)]="productService.selectedProduct.Color" placeholder="Color">
                                       </div>
                                       <div class="form-group col-md-4">
-                                        <label for="inputPassword4">Type</label>
+                                        <label for="">Type</label>
                                         <input type="text" class="form-control" name="Type" #name="ngModel" [(ngModel)]="productService.selectedProduct.Type" placeholder="Type">
                                       </div>
                                       <div class="form-group col-md-4">
-                                        <label for="inputPassword4">Suitable For</label>
-                                        <input type="text" class="form-control" name="Suitable_For" #name="ngModel" [(ngModel)]="productService.selectedProduct.Suitable_For" placeholder="Suitable_For">
+                                        <label for="">RAM</label>
+                                        <input type="text" class="form-control" name="RAM" #name="ngModel" [(ngModel)]="productService.selectedProduct.RAM" placeholder="RAM">
                                       </div>
                                     </div>
                                     <div class="form-row">
                                       <div class="form-group col-md-4">
-                                        <label for="inputPassword4">Battery Backup</label>
+                                        <label for="">Battery Backup</label>
                                         <input type="text" class="form-control" name="Battery_Backup" #name="ngModel" [(ngModel)]="productService.selectedProduct.Battery_Backup" placeholder="Battery_Backup">
                                       </div>
                                       <div class="form-group col-md-4">
-                                        <label for="inputPassword4">Battery Cell</label>
-                                        <input type="text" class="form-control" name="Battery_Cell" #name="ngModel" [(ngModel)]="productService.selectedProduct.Battery_Cell" placeholder="Battery_Cell">
-                                      </div>
-                                      <div class="form-group col-md-4">
-                                        <label for="inputPassword4">MS Office Provided</label>
-                                        <input type="text" class="form-control" name="MS_Office_Provided" #name="ngModel" [(ngModel)]="productService.selectedProduct.MS_Office_Provided" placeholder="MS_Office_Provided">
-                                      </div>
-                                    </div>
-                                    <h3 class="mb-0">Processor And Memory Features</h3> <br>
-                                    <div class="form-row">
-                                      <div class="form-group col-md-4">
-                                        <label for="inputPassword4">Processor Brand</label>
-                                        <input type="text" class="form-control" name="Processor_Brand" #name="ngModel" [(ngModel)]="productService.selectedProduct.Processor_Brand" placeholder="Processor_Brand">
-                                      </div>
-                                      <div class="form-group col-md-4">
-                                        <label for="inputPassword4">Processor Name</label>
-                                        <input type="text" class="form-control" name="Processor_Name" #name="ngModel" [(ngModel)]="productService.selectedProduct.Processor_Name" placeholder="Processor_Name">
-                                      </div>
-                                      <div class="form-group col-md-4">
-                                        <label for="inputPassword4">Processor Generation</label>
+                                        <label for="">Processor_Generation</label>
                                         <input type="text" class="form-control" name="Processor_Generation" #name="ngModel" [(ngModel)]="productService.selectedProduct.Processor_Generation" placeholder="Processor_Generation">
                                       </div>
-                                    </div>
-                                    <div class="form-row">
                                       <div class="form-group col-md-4">
-                                        <label for="inputPassword4">SSD</label>
-                                        <input type="text" class="form-control" name="SSD" #name="ngModel" [(ngModel)]="productService.selectedProduct.SSD" placeholder="SSD">
-                                      </div>
-                                      <div class="form-group col-md-4">
-                                        <label for="inputPassword4">RAM</label>
-                                        <input type="text" class="form-control" name="RAM" #name="ngModel" [(ngModel)]="productService.selectedProduct.RAM" placeholder="RAM">
-                                      </div>
-                                      <div class="form-group col-md-4">
-                                        <label for="inputPassword4">RAM Type</label>
-                                        <input type="text" class="form-control" name="RAM_Type" #name="ngModel" [(ngModel)]="productService.selectedProduct.RAM_Type" placeholder="RAM_Type">
+                                        <label for="">Processor_Name</label>
+                                        <input type="text" class="form-control" name="Processor_Name" #name="ngModel" [(ngModel)]="productService.selectedProduct.Processor_Name" placeholder="Processor_Name">
                                       </div>
                                     </div>
-                                    <div class="form-row">
-                                      <div class="form-group col-md-4">
-                                        <label for="inputPassword4">HDD Capacity</label>
-                                        <input type="text" class="form-control" name="HDD_Capacity" #name="ngModel" [(ngModel)]="productService.selectedProduct.HDD_Capacity" placeholder="HDD_Capacity">
-                                      </div>
-                                      <div class="form-group col-md-4">
-                                        <label for="inputPassword4">Processor Variant</label>
-                                        <input type="text" class="form-control" name="Processor_Variant" #name="ngModel" [(ngModel)]="productService.selectedProduct.Processor_Variant" placeholder="Processor_Variant">
-                                      </div>
-                                      <div class="form-group col-md-4">
-                                        <label for="inputPassword4">Clock Speed</label>
-                                        <input type="text" class="form-control" name="Clock_Speed" #name="ngModel" [(ngModel)]="productService.selectedProduct.Clock_Speed" placeholder="Clock_Speed">
-                                      </div>
-                                    </div>
-                                    <div class="form-row">
-                                      <div class="form-group col-md-4">
-                                        <label for="inputPassword4">Expandable Memory</label>
-                                        <input type="text" class="form-control" name="Expandable_Memory" #name="ngModel" [(ngModel)]="productService.selectedProduct.Expandable_Memory" placeholder="Expandable_Memory">
-                                      </div>
-                                      <div class="form-group col-md-4">
-                                        <label for="inputPassword4">RAM Frequency</label>
-                                        <input type="text" class="form-control" name="RAM_Frequency" #name="ngModel" [(ngModel)]="productService.selectedProduct.RAM_Frequency" placeholder="RAM_Frequency">
-                                      </div>
-                                      <div class="form-group col-md-4">
-                                        <label for="inputPassword4">Cache</label>
-                                        <input type="text" class="form-control" name="Cache" #name="ngModel" [(ngModel)]="productService.selectedProduct.Cache" placeholder="Cache">
-                                      </div>
-                                    </div>
-                                    <div class="form-row">
-                                      <div class="form-group col-md-4">
-                                        <label for="inputPassword4">RPM</label>
-                                        <input type="text" class="form-control" name="RPM" #name="ngModel" [(ngModel)]="productService.selectedProduct.RPM" placeholder="RPM">
-                                      </div>
-                                      <div class="form-group col-md-4">
-                                        <label for="inputPassword4">Graphic Processor</label>
-                                        <input type="text" class="form-control" name="Graphic_Processor" #name="ngModel" [(ngModel)]="productService.selectedProduct.Graphic_Processor" placeholder="Graphic_Processor">
-                                      </div>
-                                      <div class="form-group col-md-4">
-                                        <label for="inputPassword4">Number of Cores</label>
-                                        <input type="text" class="form-control" name="Number_of_Cores" #name="ngModel" [(ngModel)]="productService.selectedProduct.Number_of_Cores" placeholder="Number_of_Cores">
-                                      </div>
-                                    </div>
-                                    <h3 class="mb-0">Operating System</h3> <br>
-                                    <div class="form-row">
-                                      <div class="form-group col-md-4">
-                                        <label for="inputPassword4">OS Architecture</label>
-                                        <input type="text" class="form-control" name="OS_Architecture" #name="ngModel" [(ngModel)]="productService.selectedProduct.OS_Architecture" placeholder="OS_Architecture">
-                                      </div>
-                                      <div class="form-group col-md-4">
-                                        <label for="inputPassword4">Operating System</label>
-                                        <input type="text" class="form-control" name="Operating_System" #name="ngModel" [(ngModel)]="productService.selectedProduct.Operating_System" placeholder="Operating_System">
-                                      </div>
-                                      <div class="form-group col-md-4">
-                                        <label for="inputPassword4">System Architecture</label>
-                                        <input type="text" class="form-control" name="System_Architecture" #name="ngModel" [(ngModel)]="productService.selectedProduct.System_Architecture" placeholder="System_Architecture">
-                                      </div>
-                                    </div>
-                                    <h3 class="mb-0">Port And Slot Features</h3> <br>
-                                    <div class="form-row">
-                                      <div class="form-group col-md-2">
-                                        <label for="inputPassword4">Mic In</label>
-                                        <input type="text" class="form-control" name="Mic_In" #name="ngModel" [(ngModel)]="productService.selectedProduct.Mic_In" placeholder="Mic_In">
-                                      </div>
-                                      <div class="form-group col-md-2">
-                                        <label for="inputPassword4">RJ45</label>
-                                        <input type="text" class="form-control" name="RJ45" #name="ngModel" [(ngModel)]="productService.selectedProduct.RJ45" placeholder="RJ45">
-                                      </div>
-                                      <div class="form-group col-md-8">
-                                        <label for="inputPassword4">USB_Port</label>
-                                        <input type="text" class="form-control" name="USB_Port" #name="ngModel" [(ngModel)]="productService.selectedProduct.USB_Port" placeholder="USB_Port">
-                                      </div>
-                                    </div>
-                                    <div class="form-row">
-                                      <div class="form-group col-md-6">
-                                        <label for="inputPassword4">HDMI_Port</label>
-                                        <input type="text" class="form-control" name="HDMI_Port" #name="ngModel" [(ngModel)]="productService.selectedProduct.HDMI_Port" placeholder="HDMI_Port">
-                                      </div>
-                                      <div class="form-group col-md-6">
-                                        <label for="inputPassword4">Multi_Card_Slot</label>
-                                        <input type="text" class="form-control" name="Multi_Card_Slot" #name="ngModel" [(ngModel)]="productService.selectedProduct.Multi_Card_Slot" placeholder="Multi_Card_Slot">
-                                      </div>
-                                    </div>
-                                    <h3 class="mb-0">Display And Audio Features</h3> <br>
-                                    <div class="form-row">
-                                      <div class="form-group col-md-4">
-                                        <label for="inputPassword4">Touchscreen</label>
-                                        <input type="text" class="form-control" name="Touchscreen" #name="ngModel" [(ngModel)]="productService.selectedProduct.Touchscreen" placeholder="Touchscreen">
-                                      </div>
-                                      <div class="form-group col-md-4">
-                                        <label for="inputPassword4">Screen_Size</label>
-                                        <input type="text" class="form-control" name="Screen_Size" #name="ngModel" [(ngModel)]="productService.selectedProduct.Screen_Size" placeholder="Screen_Size">
-                                      </div>
-                                      <div class="form-group col-md-4">
-                                        <label for="inputPassword4">Screen_Resolution</label>
-                                        <input type="text" class="form-control" name="Screen_Resolution" #name="ngModel" [(ngModel)]="productService.selectedProduct.Screen_Resolution" placeholder="Screen_Resolution">
-                                      </div>
-                                    </div>
-                                    <div class="form-row">
-                                      <div class="form-group col-md-4">
-                                        <label for="inputPassword4">Screen_Type</label>
-                                        <input type="text" class="form-control" name="Screen_Type" #name="ngModel" [(ngModel)]="productService.selectedProduct.Screen_Type" placeholder="Screen_Type">
-                                      </div>
-                                      <div class="form-group col-md-4">
-                                        <label for="inputPassword4">Speakers</label>
-                                        <input type="text" class="form-control" name="Speakers" #name="ngModel" [(ngModel)]="productService.selectedProduct.Speakers" placeholder="Speakers">
-                                      </div>
-                                      <div class="form-group col-md-4">
-                                        <label for="inputPassword4">Internal_Mic</label>
-                                        <input type="text" class="form-control" name="Internal_Mic" #name="ngModel" [(ngModel)]="productService.selectedProduct.Internal_Mic" placeholder="Internal_Mic">
-                                      </div>
-                                    </div>
-                                    <h3 class="mb-0">Connectivity Features</h3> <br>
-                                    <div class="form-row">
-                                      <div class="form-group col-md-4">
-                                        <label for="inputPassword4">Wireless_LAN</label>
-                                        <input type="text" class="form-control" name="Wireless_LAN" #name="ngModel" [(ngModel)]="productService.selectedProduct.Wireless_LAN" placeholder="Wireless_LAN">
-                                      </div>
-                                      <div class="form-group col-md-4">
-                                        <label for="inputPassword4">Bluetooth</label>
-                                        <input type="text" class="form-control" name="Bluetooth" #name="ngModel" [(ngModel)]="productService.selectedProduct.Bluetooth" placeholder="Bluetooth">
-                                      </div>
-                                      <div class="form-group col-md-4">
-                                        <label for="inputPassword4">Ethernet</label>
-                                        <input type="text" class="form-control" name="Ethernet" #name="ngModel" [(ngModel)]="productService.selectedProduct.Ethernet" placeholder="Ethernet">
-                                      </div>
-                                    </div>
-                                    <h3 class="mb-0">Dimensions</h3> <br>
-                                    <div class="form-row">
-                                      <div class="form-group col-md-6">
-                                        <label for="inputPassword4">Dimensions</label>
-                                        <input type="text" class="form-control" name="Dimensions" #name="ngModel" [(ngModel)]="productService.selectedProduct.Dimensions" placeholder="Dimensions">
-                                      </div>
-                                      <div class="form-group col-md-6">
-                                        <label for="inputPassword4">Weight</label>
-                                        <input type="text" class="form-control" name="Weight" #name="ngModel" [(ngModel)]="productService.selectedProduct.Weight" placeholder="Weight">
-                                      </div>
-                                    </div>
-                                    <h3 class="mb-0">Additional Features</h3> <br>
-                                    <div class="form-row">
-                                      <div class="form-group col-md-6">
-                                        <label for="inputPassword4">Disk_Drive</label>
-                                        <input type="text" class="form-control" name="Disk_Drive" #name="ngModel" [(ngModel)]="productService.selectedProduct.Disk_Drive" placeholder="Disk_Drive">
-                                      </div>
-                                      <div class="form-group col-md-6">
-                                        <label for="inputPassword4">Web_Camera</label>
-                                        <input type="text" class="form-control" name="Web_Camera" #name="ngModel" [(ngModel)]="productService.selectedProduct.Web_Camera" placeholder="Web_Camera">
-                                      </div>
-                                    </div>
-                                    <div class="form-row">
-                                      <div class="form-group col-md-3">
-                                        <label for="inputPassword4">Read_Write_Speed</label>
-                                        <input type="text" class="form-control" name="Read_Write_Speed" #name="ngModel" [(ngModel)]="productService.selectedProduct.Read_Write_Speed" placeholder="Read_Write_Speed">
-                                      </div>
-                                      <div class="form-group col-md-9">
-                                        <label for="inputPassword4">Keyboard</label>
-                                        <input type="text" class="form-control" name="Keyboard" #name="ngModel" [(ngModel)]="productService.selectedProduct.Keyboard" placeholder="Keyboard">
-                                      </div>
-                                    </div>
-                                    <div class="form-row">
-                                      <div class="form-group col-md-5">
-                                        <label for="inputPassword4">Pointer_Device</label>
-                                        <input type="text" class="form-control" name="Pointer_Device" #name="ngModel" [(ngModel)]="productService.selectedProduct.Pointer_Device" placeholder="Pointer_Device">
-                                      </div>
-                                      <div class="form-group col-md-4">
-                                        <label for="inputPassword4">Additional_Features</label>
-                                        <input type="text" class="form-control" name="Additional_Features" #name="ngModel" [(ngModel)]="productService.selectedProduct.Additional_Features" placeholder="Additional_Features">
-                                      </div>
-                                      <div class="form-group col-md-3">
-                                        <label for="inputPassword4">Other_Accessories</label>
-                                        <input type="text" class="form-control" name="Other_Accessories" #name="ngModel" [(ngModel)]="productService.selectedProduct.Other_Accessories" placeholder="Other_Accessories">
-                                      </div>
-                                    </div>
-                                    <h3 class="mb-0">Warranty</h3> <br>
-                                    <div class="form-row">
-                                      <div class="form-group col-md-6">
-                                        <label for="inputPassword4">Warranty_Summary</label>
-                                        <input type="text" class="form-control" name="Warranty_Summary" #name="ngModel" [(ngModel)]="productService.selectedProduct.Warranty_Summary" placeholder="Warranty_Summary">
-                                      </div>
-                                      <div class="form-group col-md-6">
-                                        <label for="inputPassword4">Warranty_Service_Type</label>
-                                        <input type="text" class="form-control" name="Warranty_Service_Type" #name="ngModel" [(ngModel)]="productService.selectedProduct.Warranty_Service_Type" placeholder="Warranty_Service_Type">
-                                      </div>
-                                    </div>
-                                    <div class="form-row">
-                                      <div class="form-group col-md-6">
-                                        <label for="inputPassword4">Covered_in_Warranty</label>
-                                        <input type="text" class="form-control" name="Covered_in_Warranty" #name="ngModel" [(ngModel)]="productService.selectedProduct.Covered_in_Warranty" placeholder="Covered_in_Warranty">
-                                      </div>
-                                      <div class="form-group col-md-6">
-                                        <label for="inputPassword4">Not_Covered_in_Warranty</label>
-                                        <input type="text" class="form-control" name="Not_Covered_in_Warranty" #name="ngModel" [(ngModel)]="productService.selectedProduct.Not_Covered_in_Warranty" placeholder="Not_Covered_in_Warranty">
-                                      </div>
-                                    </div>
-                                    <!-- <div class="form-group col-md-6">
-                                      <label for="inputPassword4">Not_Covered_in_Warranty</label>
-                                      <input type="file" class="form-control" name="image1" #name="ngModel" [(ngModel)]="productService.selectedProduct.image1" placeholder="image1">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                      <label for="inputPassword4">image</label>
-                                      <input type="file" class="form-control" name="image2" #name="ngModel" [(ngModel)]="productService.selectedProduct.image2" placeholder="image2">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                      <label for="inputPassword4">image</label>
-                                      <input type="file" class="form-control" name="image3" #name="ngModel" [(ngModel)]="productService.selectedProduct.image3" placeholder="image3">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                      <label for="inputPassword4">image</label>
-                                      <input type="file" class="form-control" name="image4" #name="ngModel" [(ngModel)]="productService.selectedProduct.image4" placeholder="image4">
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                      <label for="inputPassword4">image</label>
-                                      <input type="file" class="form-control" name="image5" #name="ngModel" [(ngModel)]="productService.selectedProduct.image5" placeholder="image5">
-                                    </div> -->
                                     <button type="submit"  class="btn btn-primary">Add</button>
                                     <button type="button" (click)="resetForm(productForm)" class="btn btn-primary">Reset</button>
                                   </form>
@@ -339,7 +109,7 @@
                       <div class="input-group mb-4 border rounded-pill p-1">
                         <input type="search" [(ngModel)]="product" placeholder="What're you searching for?" aria-describedby="button-addon4" class="form-control bg-none border-0" >
                       </div>
-                      <div style='overflow-x:scroll;height:155rem;'>
+                      <div style='overflow-x:scroll;height:43rem;'>
                         <div class="row" >
                           <div class="col-lg-12 mx-auto" *ngFor="let product of productService.product |filter:product">
                             <ul class="list-group shadow">

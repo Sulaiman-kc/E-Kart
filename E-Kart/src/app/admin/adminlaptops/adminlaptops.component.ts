@@ -4,8 +4,9 @@ import { Product } from '../../product.model';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../../auth.service';
+import { ToastrService } from 'ngx-toastr';
 
-declare var M: any;
+// this.toastr.success('Product deleted');
 
 @Component({
   selector: 'app-adminlaptops',
@@ -18,13 +19,13 @@ export class AdminlaptopsComponent implements OnInit {
 
   constructor(public productService: ProductService,
               private _router: Router,
-              private _auth: AuthService) {
+              private _auth: AuthService,
+              private toastr: ToastrService) {
                 
                }
 
-
+  error = "0"
   ngOnInit() {
-  
     this.resetForm();
     this.productList();
   }
@@ -34,72 +35,32 @@ export class AdminlaptopsComponent implements OnInit {
       form.reset();
     this.productService.selectedProduct = {
       _id:"",
-      name:"",
-      Cost: "",
-      Discount: "",
-      Brand: "",
-      model_no:"",
-      Sales_Package:"",
-      Model_Number: "",
-      Part_Number: "",
-      Series: "",
-      Color: "",
-      Type: "",
-      Suitable_For: "",
-      Battery_Backup: "",
-      Battery_Cell: "",
-      MS_Office_Provided: "",
-      Processor_Brand: "",
-      Processor_Name: "",
-      Processor_Generation: "",
-      SSD: "",
-      RAM: "",
-      RAM_Type: "",
-      HDD_Capacity: "",
-      Processor_Variant: "",
-      Clock_Speed: "",
-      Expandable_Memory: "",
-      RAM_Frequency: "",
-      Cache: "",
-      RPM: "",
-      Graphic_Processor: "",
-      Number_of_Cores: "",
-      OS_Architecture: "",
-      Operating_System: "",
-      System_Architecture: "",
-      Mic_In: "",
-      RJ45: "",
-      USB_Port: "",
-      HDMI_Port: "",
-      Multi_Card_Slot: "",
-      Touchscreen: "",
-      Screen_Size: "",
-      Screen_Resolution: "",
-      Screen_Type: "",
-      Speakers: "",
-      Internal_Mic: "",
-      Wireless_LAN: "",
-      Bluetooth: "",
-      Ethernet : "",
-      Dimensions: "",
-      Weight: "",
-      Disk_Drive: "",
-      Web_Camera: "",
-      Read_Write_Speed: "",
-      Keyboard: "",
-      Pointer_Device: "",
-      Additional_Features :"",
-      Other_Accessories: "",
-      Warranty_Summary: "",
-      Warranty_Service_Type: "",
-      Covered_in_Warranty: "",
-      Not_Covered_in_Warranty: "",
+           // laptop and computer
 
-      // image1:"",
-      // image2:"",
-      // image3:"",
-      // image4:"",
-      // image5:"",
+     name: "",
+     URL: "",
+     Cost: "",
+     Number_Item:"",
+     Discount: "",
+     Brand: "",
+     model_no: "",
+     Sales_Package: "",
+     Model_Number: "",
+     HDD_Capacity: "",
+     Series: "",
+     Color: "",
+     Type: "",
+     RAM: "",
+     Battery_Backup: "",
+     Processor_Generation: "",
+     Processor_Name: "",
+
+
+     // mobile
+
+     Operating_System: "",
+     Internal_Storage: "",
+     Expandable_Storage: "",
     }
   }
 
@@ -111,13 +72,34 @@ export class AdminlaptopsComponent implements OnInit {
     })
   }
   
-  onSubmit(form : NgForm){    
+  onSubmit(form : NgForm){   
+    if((form.value.name == "") || 
+    (form.value.URL == "") ||
+    (form.value.Cost == "") || 
+    (form.value.Number_Item == "") || 
+    (form.value.Discount == "") || 
+    (form.value.Brand == "") || 
+    (form.value.Sales_Package == "") || 
+    (form.value.Model_Number == "") || 
+    (form.value.HDD_Capacity == "") || 
+    (form.value.Series == "") || 
+    (form.value.Color == "") || 
+    (form.value.Type == "") || 
+    (form.value.RAM == "") || 
+    (form.value.Battery_Backup == "") || 
+    (form.value.Processor_Generation == "") || 
+    (form.value.Processor_Name == ""))
+    {
+      this.error = "Please Enter all the Input"
+      return 0
+    } 
     if(form.value._id == "" ||  form.value._id==null){
         console.log("Add")
         this.productService.postProduct(form.value).subscribe(res =>{
           this.resetForm(form);
           this.productList()
-          // M.toast({html: 'One Item Added' ,classes:'rounded'})
+          this.toastr.success('New Product added');
+          this.error = "0"
         })      
     }
     else{
@@ -125,7 +107,8 @@ export class AdminlaptopsComponent implements OnInit {
       this.productService.putProduct(form.value).subscribe(res =>{
         this.resetForm(form);
         this.productList()
-        // M.toast({html: 'One Item Updated' ,classes:'rounded'})
+        this.toastr.success('Product Updated');
+        this.error = "0"
       })
     }
     
@@ -142,7 +125,7 @@ export class AdminlaptopsComponent implements OnInit {
       this.productService.deleteProduct(_id).subscribe((res)=>{
         this.productList();
         this.resetForm(form);
-        // M.toast({html: 'One Item added' ,classes:'rounded'})
+        this.toastr.success('Product Deleted');
       })
     }
   }

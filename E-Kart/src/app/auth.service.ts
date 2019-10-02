@@ -36,7 +36,7 @@ export class AuthService {
     localStorage.removeItem('token')
     localStorage.removeItem('user') 
     localStorage.removeItem('userId')
-
+    localStorage.removeItem('cart')
     this._router.navigate(['/login'])
   }
   getToken() {

@@ -4,6 +4,7 @@ const { mongoose } = require('../db');
 const User = require('../models/user');
 const Admin = require('../models/admin');
 const jwt = require('jsonwebtoken')
+var validator = require("email-validator");
 
 function verifyToken(req, res, next) {
   if(!req.headers.authorization) {
@@ -46,6 +47,9 @@ router.post('/adminlogin', (req, res) => {
 router.post('/register', (req, res) => {
   let userData = req.body
   let user = new User(userData)
+  // if(userData.email == validator.validate("test@email.com"))
+  console.log(validator.validate(userData.email));
+  
   user.save((err, registeredUser) => {
     if (err) {
       console.log(err)      
@@ -61,17 +65,17 @@ router.post('/login', (req, res) => {
   let userData = req.body
   User.findOne({email: userData.email}, (err, user) => {
     if (err) {
-      console.log(err)    
+      console.log("Invalid User")    
     } else {
       if (!user) {
-        res.status(401).send('Invalid Email')
+        res.send('Invalid Email')
       } else 
       if ( user.password !== userData.password) {
-        res.status(401).send('Invalid Password')
+        res.send('Invalid Password')
       } else {
         let payload = {subject: user._id}
         let token = jwt.sign(payload, 'secretKey')
-        res.status(200).send({token, user})
+        res.send({token, user})
       }
     }
   })
@@ -82,7 +86,7 @@ router.get('/login', (req, res) => {
     if(!err){
         res.send(docs);
     }else{
-        console.log(err);
+        console.log("invalid");
     }
   })
 })

@@ -1,14 +1,103 @@
-<div class="row" style="width: 100%; margin: 10px 0">
-    <div class="col-sm-6 col-md-3" *ngFor="let product of productService.product">
-        <div class="card mb-2">
-            <img class="card-img-top"
-                src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg"
-                alt="Card image cap" (click)="onClick(product)" style="cursor: pointer">
-            <div class="card-body">
-                <h4 class="card-title" currencyMask>₹{{product.Cost}}</h4>
-                <p class="card-text">{{product.name}}</p>
-                <a class="btn btn-primary" (click)="addToCart(product._id)" routerLinkActive="active">Add to Cart</a>
+<div class="row"style="width: 100%;">
+    <!-- <div class="col-md-3">
+        <mat-toolbar>Filters</mat-toolbar>
+        <mat-card class="example-card">
+            <mat-card-title>Price</mat-card-title>
+            <hr>
+            <mat-card-content>
+                <section class="example-section">
+                    <mat-checkbox class="example-margin" [(ngModel)]="product">Below 15000</mat-checkbox> <br>
+                    <mat-checkbox class="example-margin" [(ngModel)]="indeterminate">15000 - 20000</mat-checkbox> <br>
+                    <mat-checkbox class="example-margin" [(ngModel)]="indeterminate">20000 - 30000</mat-checkbox> <br>
+                    <mat-checkbox class="example-margin" [(ngModel)]="indeterminate">30000 - 40000</mat-checkbox> <br>
+                    <mat-checkbox class="example-margin" [(ngModel)]="indeterminate">40000 - 50000</mat-checkbox> <br>
+                    <mat-checkbox class="example-margin" [(ngModel)]="indeterminate">50000 - 60000</mat-checkbox> <br>
+                    <mat-checkbox class="example-margin" [(ngModel)]="indeterminate">60000 - 70000</mat-checkbox> <br>
+                    <mat-checkbox class="example-margin" [(ngModel)]="indeterminate">70000 - 80000</mat-checkbox> <br>
+                    <mat-checkbox class="example-margin" [(ngModel)]="indeterminate">80000 - 90000</mat-checkbox> <br>
+                    <mat-checkbox class="example-margin" [(ngModel)]="indeterminate">90000 - 100000</mat-checkbox> <br>
+                    <mat-checkbox class="example-margin" [(ngModel)]="indeterminate">Above 100000</mat-checkbox> <br>
+                </section>
+            </mat-card-content>
+            <mat-card-title>RAM</mat-card-title>
+            <hr>
+            <mat-card-content>
+                <section class="example-section">
+                    <mat-checkbox class="example-margin" [(ngModel)]="product">2 GB</mat-checkbox> <br>
+                    <mat-checkbox class="example-margin" [(ngModel)]="indeterminate">4 GB</mat-checkbox> <br>
+                    <mat-checkbox class="example-margin" [(ngModel)]="indeterminate">8 GB</mat-checkbox> <br>
+                    <mat-checkbox class="example-margin" [(ngModel)]="indeterminate">16 GB</mat-checkbox> <br>
+                </section>
+            </mat-card-content>
+            <mat-card-title>PROCESSER</mat-card-title>
+            <hr>
+            <mat-card-content>
+                <section class="example-section">
+                    <mat-checkbox class="example-margin" [(ngModel)]="product">Dual Core</mat-checkbox> <br>
+                    <mat-checkbox class="example-margin" [(ngModel)]="indeterminate">Core i3</mat-checkbox> <br>
+                    <mat-checkbox class="example-margin" [(ngModel)]="indeterminate">Core i5</mat-checkbox> <br>
+                    <mat-checkbox class="example-margin" [(ngModel)]="indeterminate">Core i7</mat-checkbox> <br>
+                    <mat-checkbox class="example-margin" [(ngModel)]="indeterminate">Core i9</mat-checkbox> <br>
+                </section>
+            </mat-card-content>
+            <mat-card-title>GENERATION</mat-card-title>
+            <hr>
+            <mat-card-content>
+                <section class="example-section">
+                    <mat-checkbox class="example-margin" [(ngModel)]="product">5th</mat-checkbox> <br>
+                    <mat-checkbox class="example-margin" [(ngModel)]="indeterminate">6th</mat-checkbox> <br>
+                    <mat-checkbox class="example-margin" [(ngModel)]="indeterminate">7th</mat-checkbox> <br>
+                    <mat-checkbox class="example-margin" [(ngModel)]="indeterminate">8th</mat-checkbox> <br>
+                    <mat-checkbox class="example-margin" [(ngModel)]="indeterminate">9th</mat-checkbox> <br>
+                </section>
+            </mat-card-content>
+        </mat-card>           
+    </div> -->
+    <!-- <div class="col-md-9"> -->
+        <div class="row" style="width: 100%; margin: 10px 0;">
+            <div class="col-md-3" *ngFor="let product of productService.product; let i = index">
+                <mat-card class="example-card" style="margin: 10px 0;">
+                    <img mat-card-image (click)="onClick(product)" style="cursor: pointer;height: 180px;" src="{{product.URL}}" alt="Photo of a Shiba Inu">
+                    <div style="height: 9rem">
+                    <mat-card-header>
+                        <mat-card-title>₹{{total[i] | number: '1.0-0'}} <span *ngIf="product.Discount != 0" style="font-size: 14px; color: rgb(141, 141, 141);text-decoration-line:line-through;" > ₹{{product.Cost}}</span></mat-card-title>
+                        <mat-card-subtitle style="color: rgb(80, 158, 2); line-height: 1px; float: right;" *ngIf="product.Discount != 0">{{product.Discount}}% off</mat-card-subtitle>
+                    </mat-card-header>
+                    <h6 class="card-text" style="color: red" *ngIf="product.Number_Item <= 5 && product.Number_Item > 0">Hurry, Only {{product.Number_Item}} left!</h6>
+                    <h6 class="card-text" style="color: red" *ngIf="product.Number_Item <= 0">Out of Order</h6>
+                    <mat-card-content style="position: relative; display: inline-block; word-wrap: break-word; overflow: hidden; max-height: 3.6em; text-align:justify; line-height: 17px; font-size: 14px">
+                        <p>{{product.name}}</p>
+                    </mat-card-content>
+                    </div>
+                    <mat-card-actions style="text-align: center">
+                        <button mat-raised-button color="primary" (click)="addToCart(product._id)" [ngClass]="{active: isOn, disabled: product.Number_Item <= 0}" routerLinkActive="active">Add to Cart</button>
+                        <!-- <button mat-button>SHARE</button> -->
+                    </mat-card-actions>
+                </mat-card>
             </div>
         </div>
-    </div>
+    <!-- </div> -->
 </div>
+<!-- <div class="row" style="width: 100%; margin: 10px 0;">
+<div class="col-md-3" *ngFor="let product of productService.product; let i = index">
+<mat-card class="example-card" style="margin: 10px 0;">
+    <img mat-card-image (click)="onClick(product)" style="cursor: pointer;" src="{{product.URL}}" alt="Photo of a Shiba Inu">
+    <div style="height: 9rem">
+    <mat-card-header>
+        <mat-card-title>₹{{total[i]}} <span *ngIf="product.Discount != 0" style="font-size: 14px; color: rgb(141, 141, 141);text-decoration-line:line-through;" > ₹{{product.Cost}}</span></mat-card-title>
+        <mat-card-subtitle style="color: rgb(80, 158, 2); line-height: 1px" *ngIf="product.Discount != 0">{{product.Discount}}% off</mat-card-subtitle>
+    </mat-card-header>
+    <h6 class="card-text" style="color: red" *ngIf="product.Number_Item <= 5 && product.Number_Item > 0">Hurry, Only {{product.Number_Item}} left!</h6>
+    <h6 class="card-text" style="color: red" *ngIf="product.Number_Item <= 0">Out of Order</h6>
+    <mat-card-content style="position: relative; display: inline-block; word-wrap: break-word; overflow: hidden; max-height: 3.6em; text-align:justify; line-height: 17px; font-size: 14px">
+        <p>
+                {{product.name}}
+        </p>
+    </mat-card-content>
+    </div>
+    <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="addToCart(product._id)" [ngClass]="{active: isOn, disabled: product.Number_Item <= 0}" routerLinkActive="active">Add to Cart</button>
+    </mat-card-actions>
+</mat-card>
+</div>
+</div> -->

@@ -1,0 +1,94 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+      <mat-accordion>
+        <mat-toolbar>PAYMENT OPTION</mat-toolbar>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Credit / Debit / ATM Card
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          
+          <mat-form-field appearance="outline" style="width: 400px">
+            <mat-label>Enter Card Number</mat-label>
+            <input matInput type="number">
+          </mat-form-field>
+          <div class="row"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <mat-form-field appearance="outline" style="width: 300px">
+              <mat-label>Expire Date</mat-label>
+              <input matInput type="date">
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="width: 200px">
+              <mat-label>CVV</mat-label>
+              <input matInput placeholder="Placeholder" type="number">
+            </mat-form-field>
+          </div>
+          <button mat-raised-button color="primary">PAY ₹{{total | number: '1.0-0'}}</button>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              PhonePe / BHIM UPI
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <p>You'll be redirected to PhonePe page, where You can pay using UPI, credit/debit cart or wallet</p>
+          <button mat-raised-button color="primary">CONTINUE</button>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Net Banking
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="HDFC Bank">HDFC Bank</mat-radio-button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <mat-radio-button value="ICICI Bank">ICICI Bank</mat-radio-button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <mat-radio-button value="State Bank of India">State Bank of India</mat-radio-button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <mat-radio-button value="Axis Bank">Axis Bank</mat-radio-button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <mat-radio-button value="Kotak Bank">Kotak Bank</mat-radio-button>
+            <button mat-raised-button color="primary">CONTINUE </button>
+          </mat-radio-group>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Cash on Delivery
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <button mat-raised-button color="primary" (click)="onDelete()">CONFIRM ORDER ₹{{total | number: '1.0-0'}}</button>
+        </mat-expansion-panel>
+        <mat-expansion-panel disabled>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              EMI (Easy Installments)
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+    <div class="col-md-4">
+        <mat-card class="example-card">
+          <mat-card-title>PRICE DETAILS</mat-card-title>
+          <hr>
+          <div class="row">
+            <div class="col-md-6">
+              <h6>Price</h6> <br>
+              <h6>Delivery</h6>
+              <hr>
+              <h6>Total Payable</h6>
+
+            </div>
+            <div class="col-md-6">
+              <h6>₹{{total | number: '1.0-0'}}</h6> <br>
+              <h6>FREE</h6>
+              <hr>
+              <h6>₹{{total | number: '1.0-0'}}</h6>
+            </div>
+          </div>
+        </mat-card>          
+    </div>
+  </div>
+</div>
+
+

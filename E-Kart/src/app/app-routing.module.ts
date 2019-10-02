@@ -14,6 +14,7 @@ import { MobilesComponent } from './user/mobiles/mobiles.component';
 import { ComputersComponent } from './user/computers/computers.component';
 import { LaptopComponent } from './user/laptop/laptop.component';
 import { CartComponent } from './cart/cart.component';
+import { MaintainComponent } from './maintain/maintain.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
   {
     path: 'events',
     component: EventsComponent,
+  },
+  {
+    path: 'main',
+    component: MaintainComponent,
   },
   {
     path: 'register',
@@ -75,7 +80,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {onSameUrlNavigation : 'reload'})],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

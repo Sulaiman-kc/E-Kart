@@ -4,6 +4,8 @@ var multer = require('multer');
 const { mongoose } = require('../db');
 var { Product } = require('../models/product')
 const { Cart } = require('../models/cart');
+const { Order } = require('../models/order');
+
 var quantity=1;
 
 
@@ -49,80 +51,35 @@ router.get('/showlaptop/:id',(req,res) =>{
 
 router.post('/addlaptop', (req,res) =>{
     var product = new Product({
+
+        // laptop and computer
+
         name: req.body.name,
+        URL: req.body.URL,
         Cost: req.body.Cost,
+        Number_Item:req.body.Number_Item,
         Discount: req.body.Discount,
         Brand: req.body.Brand,
         model_no: req.body.model_no,
         Sales_Package: req.body.Sales_Package,
         Model_Number: req.body.Model_Number,
-        Part_Number: req.body.Part_Number,
+        HDD_Capacity: req.body.HDD_Capacity,
         Series: req.body.Series,
         Color: req.body.Color,
         Type: req.body.Type,
-        Suitable_For: req.body.Suitable_For,
-        Battery_Backup: req.body.Battery_Backup,
-        Battery_Cell: req.body.Battery_Cell,
-        MS_Office_Provided: req.body.MS_Office_Provided,
-
-        Processor_Brand: req.body.Processor_Brand,
-        Processor_Name: req.body.Processor_Name,
-        Processor_Generation: req.body.Processor_Generation,
-        SSD: req.body.SSD,
         RAM: req.body.RAM,
-        RAM_Type: req.body.RAM_Type,
-        HDD_Capacity: req.body.HDD_Capacity,
-        Processor_Variant: req.body.Processor_Variant,
-        Clock_Speed: req.body.Clock_Speed,
-        Expandable_Memory: req.body.Expandable_Memory,
-        RAM_Frequency: req.body.RAM_Frequency,
-        Cache: req.body.Cache,
-        RPM: req.body.RPM,
-        Graphic_Processor: req.body.Graphic_Processor,
-        Number_of_Cores: req.body.Number_of_Cores,
+        Battery_Backup: req.body.Battery_Backup,
+        Processor_Generation: req.body.Processor_Generation,
+        Processor_Name: req.body.Processor_Name,
 
-        OS_Architecture: req.body.OS_Architecture,
+
+        // mobile
+
         Operating_System: req.body.Operating_System,
-        System_Architecture: req.body.System_Architecture,
+        Internal_Storage: req.body.Internal_Storage,
+        Expandable_Storage: req.body.Expandable_Storage,
 
-        Mic_In: req.body.Mic_In,
-        RJ45: req.body.RJ45,
-        USB_Port: req.body.USB_Port,
-        HDMI_Port: req.body.HDMI_Port,
-        Multi_Card_Slot: req.body.Multi_Card_Slot,
 
-        Touchscreen: req.body.Touchscreen,
-        Screen_Size: req.body.Screen_Size,
-        Screen_Resolution: req.body.Screen_Resolution,
-        Screen_Type: req.body.Screen_Type,
-        Speakers: req.body.Speakers,
-        Internal_Mic: req.body.Internal_Mic,
-
-        Wireless_LAN: req.body.Wireless_LAN,
-        Bluetooth: req.body.Bluetooth,
-        Ethernet : req.body.Ethernet,
-
-        Dimensions: req.body.Dimensions,
-        Weight: req.body.Weight,
-
-        Disk_Drive: req.body.Disk_Drive,
-        Web_Camera: req.body.Web_Camera,
-        Read_Write_Speed: req.body.Read_Write_Speed,
-        Keyboard: req.body.Keyboard,
-        Pointer_Device: req.body.Pointer_Device,
-        Additional_Features :req.body.Additional_Features,
-        Other_Accessories: req.body.Other_Accessories,
-
-        Warranty_Summary: req.body.Warranty_Summary,
-        Warranty_Service_Type: req.body.Warranty_Service_Type,
-        Covered_in_Warranty: req.body.Covered_in_Warranty,
-        Not_Covered_in_Warranty: req.body.Not_Covered_in_Warranty,
-
-        // image1:req.files.image1,
-        // image2:req.files.image2,
-        // image3:req.files.image3,
-        // image4:req.files.image4,
-        // image5:req.files.image5,
     })
     product.save((err,doc)=>{
         if(!err){
@@ -134,84 +91,36 @@ router.post('/addlaptop', (req,res) =>{
 })
 
 
-router.put('/updatelaptop/:id',(req,res) =>{
-    
+router.put('/updatelaptop/:id',(req,res) =>{ 
     var product = {
+        // laptop and computer
+
         name: req.body.name,
+        URL: req.body.URL,
         Cost: req.body.Cost,
+        Number_Item:req.body.Number_Item,
         Discount: req.body.Discount,
         Brand: req.body.Brand,
         model_no: req.body.model_no,
         Sales_Package: req.body.Sales_Package,
         Model_Number: req.body.Model_Number,
-        Part_Number: req.body.Part_Number,
+        HDD_Capacity: req.body.HDD_Capacity,
         Series: req.body.Series,
         Color: req.body.Color,
         Type: req.body.Type,
-        Suitable_For: req.body.Suitable_For,
-        Battery_Backup: req.body.Battery_Backup,
-        Battery_Cell: req.body.Battery_Cell,
-        MS_Office_Provided: req.body.MS_Office_Provided,
-
-        Processor_Brand: req.body.Processor_Brand,
-        Processor_Name: req.body.Processor_Name,
-        Processor_Generation: req.body.Processor_Generation,
-        SSD: req.body.SSD,
         RAM: req.body.RAM,
-        RAM_Type: req.body.RAM_Type,
-        HDD_Capacity: req.body.HDD_Capacity,
-        Processor_Variant: req.body.Processor_Variant,
-        Clock_Speed: req.body.Clock_Speed,
-        Expandable_Memory: req.body.Expandable_Memory,
-        RAM_Frequency: req.body.RAM_Frequency,
-        Cache: req.body.Cache,
-        RPM: req.body.RPM,
-        Graphic_Processor: req.body.Graphic_Processor,
-        Number_of_Cores: req.body.Number_of_Cores,
+        Battery_Backup: req.body.Battery_Backup,
+        Processor_Generation: req.body.Processor_Generation,
+        Processor_Name: req.body.Processor_Name,
 
-        OS_Architecture: req.body.OS_Architecture,
+
+        // mobile
+
         Operating_System: req.body.Operating_System,
-        System_Architecture: req.body.System_Architecture,
+        Internal_Storage: req.body.Internal_Storage,
+        Expandable_Storage: req.body.Expandable_Storage,
 
-        Mic_In: req.body.Mic_In,
-        RJ45: req.body.RJ45,
-        USB_Port: req.body.USB_Port,
-        HDMI_Port: req.body.HDMI_Port,
-        Multi_Card_Slot: req.body.Multi_Card_Slot,
-
-        Touchscreen: req.body.Touchscreen,
-        Screen_Size: req.body.Screen_Size,
-        Screen_Resolution: req.body.Screen_Resolution,
-        Screen_Type: req.body.Screen_Type,
-        Speakers: req.body.Speakers,
-        Internal_Mic: req.body.Internal_Mic,
-
-        Wireless_LAN: req.body.Wireless_LAN,
-        Bluetooth: req.body.Bluetooth,
-        Ethernet : req.body.Ethernet,
-
-        Dimensions: req.body.Dimensions,
-        Weight: req.body.Weight,
-
-        Disk_Drive: req.body.Disk_Drive,
-        Web_Camera: req.body.Web_Camera,
-        Read_Write_Speed: req.body.Read_Write_Speed,
-        Keyboard: req.body.Keyboard,
-        Pointer_Device: req.body.Pointer_Device,
-        Additional_Features :req.body.Additional_Features,
-        Other_Accessories: req.body.Other_Accessories,
-
-        Warranty_Summary: req.body.Warranty_Summary,
-        Warranty_Service_Type: req.body.Warranty_Service_Type,
-        Covered_in_Warranty: req.body.Covered_in_Warranty,
-        Not_Covered_in_Warranty: req.body.Not_Covered_in_Warranty,
-
-
-        // image1:req.files[0].filename,
-        // image2:req.files[1].filename,
-        // image3:req.files[2].filename,
-        // image4:req.files[4].filename,
-        // image5:req.files[5].filename,
+        
     }
     Product.findByIdAndUpdate(req.params.id,{$set: product},{new:true},(err,doc)=>{
         if(!err){
@@ -294,6 +203,32 @@ router.post('/getcart/',(req,res)=>{
     const p_id = req.body.userId.userId;
     console.log(" user "+user_id)
     Cart.findOne({userId :user_id},(err,doc)=>{
+        if(!err){
+            res.send(doc);
+        }else{
+            console.log(err);
+        }
+    })
+})
+
+router.delete('/deletecart/:id',(req,res)=>{
+    Cart.findByIdAndRemove(req.params.id,(err,doc)=>{
+        if(!err){
+            res.send(doc);
+        }else{
+            console.log(err);
+        }
+    })
+})
+
+
+router.put('/updatecart/:id',(req,res) =>{ 
+    var cart = {
+       quantity: req.body.quantity,
+       productId: req.body.productId,
+       userId: req.body.userId,
+    }
+    Cart.findByIdAndUpdate(req.params.id,{$set: cart},{new:true},(err,doc)=>{
         if(!err){
             res.send(doc);
         }else{

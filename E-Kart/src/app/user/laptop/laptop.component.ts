@@ -10,17 +10,33 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class LaptopComponent implements OnInit {
 
+  productId = localStorage.getItem('productId')
   constructor(public productService: ProductService,public route:ActivatedRoute) { }
   product:{}
   ngOnInit() {
 
-    console.log(this.productService.product);
     this.products()
+    // console.log(this.product);
+    this.productList(this.productId)
   }
   products(){
     this.product = this.productService.product
   }
 
+
+  addToCart(id){
+    this.productService.addToCartApi(id).subscribe((res)=>{
+      alert('Added to Cart')
+
+    })
+  }
+
+  productList(_id: string){
+    this.productService.getSingleProduct(_id).subscribe((res)=>{
+      console.log(res);
+      // alert('added')
+    })
+  }
 
   // productList(_id : string){
   

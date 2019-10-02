@@ -1,6 +1,6 @@
 <!--Navbar -->
 <nav class="mb-1 navbar navbar-expand-lg navbar-dark orange lighten-1">
-  <a class="navbar-brand" href="#">Navbar</a>
+  <a class="navbar-brand" href="#">E-kart</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-333"
     aria-controls="navbarSupportedContent-333" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -15,10 +15,10 @@
     </ul>
     <ul class="navbar-nav ml-auto nav-flex-icons">
       <li class="nav-item">
-        <a class="nav-link" data-toggle="modal" data-target="#modalLoginForm" href="0#" *ngIf="!_auth.loggedIn()">Login</a>
+        <a class="nav-link" data-toggle="modal" data-target="#modalLoginForm" href="" *ngIf="!_auth.loggedIn()">Login</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="0#" *ngIf="_auth.loggedIn()">{{user}}</a>
+        <a class="nav-link" *ngIf="_auth.loggedIn()" style="font-weight: 900">Welcome <span style="font-weight: 900; color: rgb(4, 1, 173)"> {{user}}</span></a>
       </li>
       
       <li class="nav-item dropdown">
@@ -39,10 +39,12 @@
         </div>
       </li> 
       <li class="nav-item">
-        <a class="nav-link waves-effect waves-light" routerLink="/cart" style="font-weight: 900">
-           {{cart.product.length}} <i class="fa fa-shopping-cart" style="font-size: 23px"></i>
+        <a class="nav-link waves-effect waves-light" routerLink="/cart" >
+           <!-- <span style="font-weight: 900; color: rgb(4, 1, 173)" *ngIf="_auth.loggedIn()">{{cartLen}}</span> <i class="fa fa-shopping-cart" style="font-size: 23px"></i> -->
+           <mat-icon matBadge="{{cartLen}}" *ngIf="_auth.loggedIn()">shopping_cart</mat-icon>
         </a>
       </li>
+      
     </ul>
   </div>
 </nav>
